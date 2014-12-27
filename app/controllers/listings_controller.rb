@@ -24,6 +24,13 @@ class ListingsController < ApplicationController
   end
 
   def create
+    photos = params[:listing][:photos_attributes]['0'][:image]
+    params[:listing][:photos_attributes] = {}
+    photos.each_with_index do | photo, index |
+      img = {}
+      img["image"] = photo
+      params[:listing][:photos_attributes][index.to_s] = img
+    end
     @listing = Listing.new(listing_params)
     if @listing.save!
       redirect_to @listing

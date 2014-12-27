@@ -5,13 +5,12 @@
       <h2><%= @listing.business_name.capitalize %></h2>
       <div class="bdr-bottom spacer10"></div>
       <div class="uk-row">
-        <input id="fileupload" type="file" name="files[]" data-url="<%= listing_upload_photos_path(@listing)%>" multiple>
+        <div class="uk-form-file">
+          <button class="uk-button uk-button-primary"><i class="uk-icon-plus"></i> Select Files</button>
+          <input id="fileupload" type="file" name="files[]" data-url="<%= listing_upload_photos_path(@listing)%>" multiple>
+        </div>
       </div>
       <div class="spacer20"></div>
-      <div class="uk-row">
-        <%= link_to 'Upload Photos', listing_upload_photo_page_path(@listing), class: "uk-button uk-button-primary" %>
-      </div>
-      <div class="spacer10"></div>
       <div id="listing_images" class="uk-row">
         <% @listing.photos && @listing.photos.each do | photo | %>
           <%= image_tag(photo.image.url,  style: "width: 200px; height: 150px;", class: 'uk-thumbnail') %>

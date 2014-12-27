@@ -22,13 +22,17 @@
     <label for="photos" class="uk-form-label">Photos</label>
     <div class="uk-form-controls">
       <%= f.fields_for :photos do |photos_form| %>
-        <%= photos_form.file_field :image %>
-        <%= photos_form.link_to_remove "Remove this task" %>
+        <div class="uk-form-file">
+          <button class="uk-button uk-button-primary"><i class="uk-icon-plus"></i> Select Photos</button>
+          <%= photos_form.file_field :image, multiple: true %>
+        </div>
       <% end %>
-      <p><%= f.link_to_add "Add a task", :photos %></p>
+    </div>
+    <div class="clearboth spacer10"></div>
+    <div id="listing-selected-files" class="uk-form-controls">
+
     </div>
   </div>
-  <%# Image Upload Logic Goes Here %>
   <%# Video Upload Logic Goes Here %>
   <div class="uk-form-row">
     <div class="uk-form-controls">
