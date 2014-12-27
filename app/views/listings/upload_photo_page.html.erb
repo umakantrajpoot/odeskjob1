@@ -1,0 +1,40 @@
+<div class="uk-grid"></div>
+<div class="uk-grid">
+  <div class="uk-width-large-8-10 uk-push-1-10">
+    <div class="uk-row">
+      <h2><%= @listing.business_name.capitalize %></h2>
+      <div class="bdr-bottom spacer10"></div>
+      <div class="uk-row">
+        <input id="fileupload" type="file" name="files[]" data-url="<%= listing_upload_photos_path(@listing)%>" multiple>
+      </div>
+      <div class="spacer20"></div>
+      <div class="uk-row">
+        <%= link_to 'Upload Photos', listing_upload_photo_page_path(@listing), class: "uk-button uk-button-primary" %>
+      </div>
+      <div class="spacer10"></div>
+      <div id="listing_images" class="uk-row">
+        <% @listing.photos && @listing.photos.each do | photo | %>
+          <%= image_tag(photo.image.url,  style: "width: 200px; height: 150px;", class: 'uk-thumbnail') %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $(function () {
+    $('#fileupload').fileupload({
+      dataType: 'json',
+      done: function (e, data) {
+        var imageUrl = data.result.photos.image.url;
+        var imageString = "<img alt='Thumb handshake' src='" + imageUrl + "' class='uk-thumbnail' style='width: 200px; height: 150px;'>";
+        if (imageUrl.length != 0) {
+          if($("#listing_images").children().length > 0){
+            $("#listing_images").children().last().after(imageString);
+          } else {
+            $("#listing_images").html(imageString);
+          }
+        }
+      }
+    });
+  });
+</script>

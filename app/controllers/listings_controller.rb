@@ -48,6 +48,26 @@ class ListingsController < ApplicationController
     redirect_to action: 'index', notice: 'Listing was successfully deleted.'
   end
 
+  def upload_photo_page
+    @listing = Listing.where(:id => params[:listing_id]).first
+  end
+
+  def upload_photos
+    @listing = Listing.where(:id => params[:listing_id]).first
+    params[:photo] = {} if params[:photo].blank?
+    #debugger
+    params[:photo][:listing_id] = params[:listing_id].to_i
+    params[:photo][:title] = params[:files][0].original_filename
+    params[:photo][:image] = params[:files][0]
+    if @listing.photos.create(photo_params)
+      photos = @listing.photos.last
+      respond_to do |format|
+        format.html
+        format.json { render json: {:success => true, photos: photos, :message => "Successfully uploaded photo"}}
+      end
+    end
+  end
+
   private
   def set_listing
     @listing = Listing.find(params[:id])
@@ -55,10 +75,12 @@ class ListingsController < ApplicationController
 
   def listing_params
     params.require(:listing).permit(:business_name,
-                                    :business_number,
-                                    photos_attributes: [:id, :image, :title, :listing_id, :_destroy],
-                                    videos_attributes: [:id, :vid, :title, :listing_id, :_destroy]
-                                    )
+    :business_number, photos_attributes: [:id, :image, :title, :listing_id, :_destroy],
+      videos_attributes: [:id, :vid, :title, :listing_id, :_destroy]
+    )
   end
 
+  def photo_params
+    params.require(:photo).permit(:listing_id, :title, :image)
+  end
 end

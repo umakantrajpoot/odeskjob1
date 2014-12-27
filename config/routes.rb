@@ -4,6 +4,9 @@ Rails.application.routes.draw do
 
   # resources :videos
   # resources :photos
-  resources :listings
+  resources :listings do
+    get :upload_photo_page
+    post :upload_photos
+  end
 
 end
