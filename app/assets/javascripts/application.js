@@ -14,3 +14,6 @@
 //= require jquery_ujs
 //= require uikit
 //= require jquery_nested_form
+//= require jquery-fileupload/vendor/jquery.ui.widget
+//= require jquery-fileupload/jquery.iframe-transport
+//= require jquery-fileupload/jquery.fileupload

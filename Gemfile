@@ -12,6 +12,7 @@ gem 'jbuilder', '~> 2.0'
 gem "unicorn"
 gem "simple_form"
 gem "nested_form"
+gem "jquery-fileupload-rails"
 gem "uikit-sass-rails"
 gem "fog", "~>1.23", require: "fog/aws/storage"
 gem "asset_sync"

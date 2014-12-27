@@ -1,23 +1,47 @@
 <% content_for :javascript do %>
   <%= javascript_include_tag "https://cdn.sublimevideo.net/js/ulrkjov4.js" %>
 <% end %>
-
-<h1><%= @listing.business_name %></h1>
-<h1><%= @listing.business_number %></h1>
-
-<% @listing.videos.each do |video| %>
-    <video class="sublime" data-settings="uid:demo-responsive-fit-resizing; autoresize:fit;" title="<%= @listing.business_name %> Video" width="640" height="360" preload="none">
-      <source src="<%= video.vid.url %>">
-    </video>
-<% end %>
-
-<% @listing.photos[0..3].each do |photo_image, i| %>
-    <%= image_tag(photo_image.image.url(:thumb), class: 'uk-thumbnail') %>
-<% end %>
-
-
-<ul>
-  <li><%= link_to 'Back', listings_path %></li>
-  <li><%= link_to 'Edit', edit_listing_path(@listing) %></li>
-  <li><%= link_to 'Delete', @listing, method: :delete, data: { confirm: "Are you sure you want to delete #{@listing.business_name}?" } %></li>
-</ul>
+<div class="uk-grid"></div>
+<div class="uk-grid">
+  <div class="uk-width-large-8-10 uk-push-1-10">
+    <div class="uk-row">
+      <h2><%= @listing.business_name.capitalize %></h2>
+      <div class="bdr-bottom spacer10"></div>
+      <div class="uk-row">
+        <%= @listing.business_number %>
+      </div>
+      <div class="spacer10"></div>
+      <div class="uk-row spacer5">
+        <strong></storng>Videos:</strong>
+      </div>
+      <div class="uk-row">
+        <% @listing.videos && @listing.videos.each do |video| %>
+            <video class="sublime" data-settings="uid:demo-responsive-fit-resizing; autoresize:fit;" title="<%= @listing.business_name %> Video" width="640" height="360" preload="none">
+              <source src="<%= video.vid.url %>">
+            </video>
+        <% end %>
+        <% if @listing.videos.blank? %>
+          There is no video available.
+        <% end %>
+      </div>
+      <div class="spacer10"></div>
+      <div class="uk-row spacer5">
+        <strong></storng>Photos:</strong>
+      </div>
+      <div class="uk-row">
+        <% @listing.photos && @listing.photos[0..3].each do |photo_image, i| %>
+            <%= image_tag(photo_image.image.url(:thumb),  style: "width: 200px; height: 150px;", class: 'uk-thumbnail') %>
+        <% end %>
+        <% if @listing.photos.blank? %>
+          There is no image available.
+        <% end %>
+      </div>
+      <div class="uk-row spacer20"></div>
+      <div class="uk-row">
+        <%= link_to 'Back', listings_path, class: "uk-button uk-button-primary" %>
+        <%= link_to 'Edit', edit_listing_path(@listing), class: "uk-button uk-button-primary" %>
+        <%= link_to 'Delete', @listing, method: :delete, data: { confirm: "Are you sure you want to delete #{@listing.business_name}?" }, class: "uk-button uk-button-danger" %>
+      </div>
+    </div>
+  </div>
+</div>
