@@ -1,0 +1,23 @@
+<% content_for :javascript do %>
+  <%= javascript_include_tag "https://cdn.sublimevideo.net/js/ulrkjov4.js" %>
+<% end %>
+
+<h1><%= @listing.business_name %></h1>
+<h1><%= @listing.business_number %></h1>
+
+<% @listing.videos.each do |video| %>
+    <video class="sublime" data-settings="uid:demo-responsive-fit-resizing; autoresize:fit;" title="<%= @listing.business_name %> Video" width="640" height="360" preload="none">
+      <source src="<%= video.vid.url %>">
+    </video>
+<% end %>
+
+<% @listing.photos[0..3].each do |photo_image, i| %>
+    <%= image_tag(photo_image.image.url(:thumb), class: 'uk-thumbnail') %>
+<% end %>
+
+
+<ul>
+  <li><%= link_to 'Back', listings_path %></li>
+  <li><%= link_to 'Edit', edit_listing_path(@listing) %></li>
+  <li><%= link_to 'Delete', @listing, method: :delete, data: { confirm: "Are you sure you want to delete #{@listing.business_name}?" } %></li>
+</ul>

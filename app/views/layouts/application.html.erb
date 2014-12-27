@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Odeskjob</title>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <nav class="uk-navbar">
+      <a href="javascript:void(0);" class="uk-navbar-brand">Brand</a>
+      <ul class="uk-navbar-nav">
+        <li data-uk-dropdown="" class="uk-parent uk-active">
+          <a href="javascript:void(0);"></i>Listings</a>
+          <div class="uk-dropdown uk-dropdown-navbar" style="">
+            <ul class="uk-nav uk-nav-navbar">
+              <li><a href="/listings">All Listing</a></li>
+              <li><a href="/listings/new">New List</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </nav>
+    <div class="container">
+      <%= yield %>
+    </div>
+  </body>
+</html>

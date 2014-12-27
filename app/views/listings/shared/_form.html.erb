@@ -1,0 +1,40 @@
+<div class="uk-row">
+  <div class="uk-width-large-10-10 listing-header-txt">
+    Listing New Form
+  </div>
+</div>
+<div class="bdr-bottom"></div>
+<%= nested_form_for @listing, html: { multipart: true, class: "uk-form uk-form-horizontal"}  do |f| %>
+  <div class="uk-form-row"></div>
+  <div class="uk-form-row">
+    <%= f.label :business_name, 'Business Name', class: "uk-form-label" %>
+    <div class="uk-form-controls">
+      <%= f.text_field :business_name, :autofocus => true %>
+    </div>
+  </div>
+  <div class="uk-form-row">
+    <%= f.label :business_number, 'Business Number', class: "uk-form-label" %>
+    <div class="uk-form-controls">
+      <%= f.text_field :business_number %>
+    </div>
+  </div>
+  <div class="uk-form-row">
+    <label for="photos" class="uk-form-label">Photos</label>
+    <div class="uk-form-controls">
+      <%= f.fields_for :photos do |photos_form| %>
+        <%= photos_form.file_field :image %>
+        <%= photos_form.link_to_remove "Remove this task" %>
+      <% end %>
+      <p><%= f.link_to_add "Add a task", :photos %></p>
+    </div>
+  </div>
+  <%# Image Upload Logic Goes Here %>
+  <%# Video Upload Logic Goes Here %>
+  <div class="uk-form-row">
+    <div class="uk-form-controls">
+      <button type="submit" class="uk-button uk-button-primary">Create Listing</button>
+    </div>
+  </div>
+<% end %>
+<div class="uk-grid">&nbsp;</div>
+<div class="bdr-bottom"></div>

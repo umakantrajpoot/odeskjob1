@@ -1,0 +1,37 @@
+<div class="uk-grid"></div>
+<div class="uk-grid">
+  <div class="uk-width-large-8-10 uk-push-1-10">
+    <div class="uk-row">
+      <div class="uk-width-large-10-10 listing-header-txt">
+        Listing
+      </div>
+    </div>
+    <div class="bdr-bottom"></div>
+    <table class="uk-table uk-table-striped">
+      <thead>
+        <tr>
+          <th>Listing Name</th>
+          <th>Active Citations</th>
+          <th>Pending Citations</th>
+          <th>Problems</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @listings.each do |listing| %>
+        <tr>
+          <td><%= link_to "#{listing.business_name}", listing %></td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <div class="uk-row">
+      <div class="uk-width-large-1-2">
+        <%= link_to 'New Listing', new_listing_path, class: 'uk-button' %>
+      </div>
+    </div>
+  </div>
+
+</div>
