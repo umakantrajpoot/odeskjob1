@@ -10,6 +10,10 @@
           <input id="fileupload" type="file" name="files[]" data-url="<%= listing_upload_photos_path(@listing)%>" multiple>
         </div>
       </div>
+      <div class="spacer10"></div>
+      <div class="progress" id="progress">
+        <div class="progress-bar progress-bar-success"></div>
+      </div>
       <div class="spacer20"></div>
       <div id="listing_images" class="uk-row">
         <% @listing.photos && @listing.photos.each do | photo | %>
@@ -23,10 +27,17 @@
   $(function () {
     $('#fileupload').fileupload({
       dataType: 'json',
+      progressall: function (e, data) {
+        var progress = parseInt(data.loaded / data.total * 100, 10);
+        $('#progress .progress-bar-success').css(
+            'width',
+            progress + '%'
+        );
+      },
       done: function (e, data) {
         var imageUrl = data.result.photos.image.url;
         var imageString = "<img alt='Thumb handshake' src='" + imageUrl + "' class='uk-thumbnail' style='width: 200px; height: 150px;'>";
-        if (imageUrl.length != 0) {
+        if (imageUrl != null && imageUrl.length != 0) {
           if($("#listing_images").children().length > 0){
             $("#listing_images").children().last().after(imageString);
           } else {

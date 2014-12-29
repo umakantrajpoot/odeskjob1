@@ -7,4 +7,9 @@ $(document).ready(function(){
     });
     $("#listing-selected-files").html(filesStr);
   });
+  $("#listing_submit").on('click', function(event){
+    $(event.target).prop('disabled', 'disabled')
+    $(".listing-submit-msg").removeClass('uk-hidden');
+  });
 });
+
