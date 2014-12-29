@@ -10,17 +10,19 @@ $(document).ready(function(){
 
   $('#listing_business_number').on('keyup', function(event){
     var businessNumber = $(event.target).val();
-    if(businessNumber != null){
+    if(businessNumber != null && businessNumber  != ""){
       $(".input-icon-spinner").removeClass('uk-hidden');
       $.ajax({
         type: "get",
         url: "/listings/get_business_number",
         dataType: "script",
         data: {business_number: businessNumber}
-      }).done(function( response ) {
-        console.log(response);
-
       });
+    } else {
+      $(".input-icon-spinner").removeClass('uk-hidden');
+      $(".input-icon-check").addClass('uk-hidden');
+      $("#listing_submit").prop('disabled', 'disabled')
+      $("#bussiness_number_alert_msg").removeClass('uk-hidden');
     }
   });
 
