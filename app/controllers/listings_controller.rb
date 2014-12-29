@@ -75,6 +75,15 @@ class ListingsController < ApplicationController
     end
   end
 
+  def get_business_number
+    @listing = Listing.where(:business_number => params[:business_number]).first
+    respond_to do |format|
+      format.html
+      format.js
+      format.json { render json: {:success => true, listing: listing}}
+    end
+  end
+
   private
   def set_listing
     @listing = Listing.find(params[:id])

@@ -15,7 +15,10 @@
   <div class="uk-form-row">
     <%= f.label :business_number, 'Business Number', class: "uk-form-label" %>
     <div class="uk-form-controls">
-      <%= f.text_field :business_number %>
+      <%= f.text_field :business_number, class: "floatL" %>
+      <i class="uk-icon-spinner uk-icon-spin input-icon-spinner uk-hidden floatL"></i>
+      <i class="uk-icon uk-icon-check input-icon-check uk-hidden floatL"></i>
+      <span id="bussiness_number_alert_msg" class="uk-hidden">This bussiness number already exist!</span>
     </div>
   </div>
   <div class="uk-form-row">

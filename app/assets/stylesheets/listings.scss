@@ -35,3 +35,23 @@
   transition: width 0.6s ease 0s;
   width: 0;
 }
+
+.input-icon-spinner{
+  margin-left: -20px;
+  margin-top: 8px;
+  vertical-align: middle;
+}
+
+.input-icon-check{
+  color: #008000;
+  margin-left: -20px;
+  margin-top: 8px;
+  vertical-align: middle;
+}
+
+#bussiness_number_alert_msg{
+  color: red;
+  margin-left: 5px;
+  padding-top: 8px;
+  vertical-align: middle;
+}

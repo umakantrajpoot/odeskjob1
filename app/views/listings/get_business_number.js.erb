@@ -1,0 +1,11 @@
+<% if @listing.blank? %>
+  $("#listing_submit").prop('disabled', '')
+  $(".input-icon-spinner").addClass('uk-hidden');
+  $(".input-icon-check").removeClass('uk-hidden');
+  $("#bussiness_number_alert_msg").addClass('uk-hidden');
+<% else %>
+  $(".input-icon-spinner").removeClass('uk-hidden');
+  $(".input-icon-check").addClass('uk-hidden');
+  $("#listing_submit").prop('disabled', 'disabled')
+  $("#bussiness_number_alert_msg").removeClass('uk-hidden');
+<% end %>
