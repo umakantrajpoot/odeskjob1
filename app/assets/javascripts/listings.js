@@ -12,6 +12,7 @@ $(document).ready(function(){
     var businessNumber = $(event.target).val();
     if(businessNumber != null && businessNumber  != ""){
       $(".input-icon-spinner").removeClass('uk-hidden');
+      $(".input-icon-check").addClass('uk-hidden');
       $.ajax({
         type: "get",
         url: "/listings/get_business_number",
