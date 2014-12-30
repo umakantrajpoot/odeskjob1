@@ -28,8 +28,9 @@ $(document).ready(function(){
   });
 
   $('#listing_business_number').on('focusout', function(event){
-    var businessNumber = $(event.target).val();
-    if(businessNumber != null && businessNumber  != ""){
+    var businessNumber = $("#listing_business_number").val();
+
+    if(businessNumber == null && businessNumber == ""){
       $(".input-icon-spinner").removeClass('uk-hidden');
       $(".input-icon-check").addClass('uk-hidden');
       $("#listing_submit").prop('disabled', 'disabled')
