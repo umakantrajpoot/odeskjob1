@@ -23,6 +23,8 @@ gem "carrierwave-video-thumbnailer"
 gem "figaro"
 gem 'carrierwave_backgrounder'
 gem 'sidekiq'
+gem 'redis'
+
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
