@@ -1,6 +1,8 @@
 class PhotoUploader < CarrierWave::Uploader::Base
+  include ::CarrierWave::Backgrounder::Delay
   include CarrierWave::RMagick
   include CarrierWave::MimeTypes
+
   process :set_content_type
 
   if Rails.env.development? || Rails.env.test?

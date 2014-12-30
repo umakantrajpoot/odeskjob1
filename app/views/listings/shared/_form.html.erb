@@ -24,12 +24,12 @@
   <div class="uk-form-row">
     <label for="photos" class="uk-form-label">Photos</label>
     <div class="uk-form-controls">
-      <%= f.fields_for :photos do |photos_form| %>
+      <%#= f.fields_for :photos do |photos_form| %>
         <div class="uk-form-file">
           <button class="uk-button uk-button-primary"><i class="uk-icon-plus"></i> Select Photos</button>
-          <%= photos_form.file_field :image, multiple: true %>
+          <%= f.file_field :image, multiple: true %>
         </div>
-      <% end %>
+      <%# end %>
     </div>
     <div class="clearboth spacer10"></div>
     <div id="listing-selected-files" class="uk-form-controls">

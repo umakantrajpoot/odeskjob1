@@ -1,7 +1,7 @@
 class ListingsController < ApplicationController
 
   def index
-    @listings = Listing.all
+    @listings = Listing.order("updated_at DESC")
   end
 
   def show
@@ -24,8 +24,9 @@ class ListingsController < ApplicationController
   end
 
   def create
-    photos = params[:listing][:photos_attributes]['0'][:image]
+    photos = params[:listing][:image]
     params[:listing][:photos_attributes] = {}
+
     photos.each_with_index do | photo, index |
       img = {}
       img["image"] = photo
@@ -62,7 +63,6 @@ class ListingsController < ApplicationController
   def upload_photos
     @listing = Listing.where(:id => params[:listing_id]).first
     params[:photo] = {} if params[:photo].blank?
-    #debugger
     params[:photo][:listing_id] = params[:listing_id].to_i
     params[:photo][:title] = params[:files][0].original_filename
     params[:photo][:image] = params[:files][0]
