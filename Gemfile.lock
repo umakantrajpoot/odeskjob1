@@ -292,7 +292,6 @@ DEPENDENCIES
   pg
   rails (= 4.2.0)
   rails_12factor
-  redis
   rmagick
   sass-rails (~> 5.0)
   sidekiq
