@@ -33,10 +33,15 @@ class ListingsController < ApplicationController
 #       params[:listing][:photos_attributes][index.to_s] = img
 #     end
 # #=end
+    photos_name = []
+    photos.each do | photo |
+      photos_name << photo.path.split('tmp/')[1]
+      FileUtils.move(photo.path, "#{Rails.root}/public/tmp")
+    end
 
     @listing = Listing.new(listing_params)
     if @listing.save!
-      ListingWorker.perform_async(photos.map(&:path), @listing.id)
+      ListingWorker.perform_async(photos_name, @listing.id)
       #HardWorker.perform_async(photos.map(&:path), @listing.id)
       redirect_to action: 'index', notice: 'Successfully created listing'
     else
