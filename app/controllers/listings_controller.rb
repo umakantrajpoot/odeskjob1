@@ -26,11 +26,11 @@ class ListingsController < ApplicationController
   def create
     photos = params[:listing][:image]
     params[:listing][:photos_attributes] = {}
-    #     photos.each_with_index do | photo, index |
-    #       img = {}
-    #       img["image"] = photo
-    #       params[:listing][:photos_attributes][index.to_s] = img
-    #     end
+    #~ photos.each_with_index do | photo, index |
+      #~ img = {}
+      #~ img["image"] = photo
+      #~ params[:listing][:photos_attributes][index.to_s] = img
+    #~ end
 
     #~ photos_name = []
     #~ photos.each do | photo |
@@ -41,9 +41,8 @@ class ListingsController < ApplicationController
     @listing = Listing.new(listing_params)
     if @listing.save!
       photos_name = []
-      tmp_directory = FileUtils.mkdir_p(File.join("#{Rails.root}/tmp/uploads/#{@listing.class.to_s.underscore}/images/#{@listing.id}"), :mode => 0777)[0]
+      tmp_directory = FileUtils.mkdir_p(File.join("#{Rails.root}/tmp/cache/uploads/#{@listing.class.to_s.underscore}/images/#{@listing.id}"), :mode => 0777)[0]
         photos.each do | photo |
-        puts photo.path
         photos_name << photo.path.split('tmp/')[1]
         FileUtils.move(photo.path, tmp_directory)
       end
