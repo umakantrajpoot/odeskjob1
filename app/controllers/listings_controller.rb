@@ -26,23 +26,29 @@ class ListingsController < ApplicationController
   def create
     photos = params[:listing][:image]
     params[:listing][:photos_attributes] = {}
-# #=begin
-#     photos.each_with_index do | photo, index |
-#       img = {}
-#       img["image"] = photo
-#       params[:listing][:photos_attributes][index.to_s] = img
-#     end
-# #=end
-    photos_name = []
-    photos.each do | photo |
-      photos_name << photo.path.split('tmp/')[1]
-      FileUtils.move(photo.path, "#{Rails.root}/tmp/uploads")
-    end
+    #     photos.each_with_index do | photo, index |
+    #       img = {}
+    #       img["image"] = photo
+    #       params[:listing][:photos_attributes][index.to_s] = img
+    #     end
+
+    #~ photos_name = []
+    #~ photos.each do | photo |
+      #~ photos_name << photo.path.split('tmp/')[1]
+      #~ FileUtils.move(photo.path, "#{Rails.root}/tmp/uploads")
+    #~ end
 
     @listing = Listing.new(listing_params)
     if @listing.save!
-      ListingWorker.perform_async(photos_name, @listing.id)
-      #HardWorker.perform_async(photos.map(&:path), @listing.id)
+      photos_name = []
+      tmp_directory = FileUtils.mkdir_p(File.join("#{Rails.root}/tmp/uploads/#{@listing.class.to_s.underscore}/images/#{@listing.id}"), :mode => 0777)[0]
+        photos.each do | photo |
+        puts photo.path
+        photos_name << photo.path.split('tmp/')[1]
+        FileUtils.move(photo.path, tmp_directory)
+      end
+
+      ListingWorker.perform_async(tmp_directory, photos_name, @listing.id)
       redirect_to action: 'index', notice: 'Successfully created listing'
     else
       raise

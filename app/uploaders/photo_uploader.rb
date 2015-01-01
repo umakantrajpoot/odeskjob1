@@ -7,10 +7,6 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
   process :set_content_type
 
-  def cache_dir
-    "#{Rails.root}/tmp/uploads"
-  end
-
   if Rails.env.development? || Rails.env.test?
 
     storage :file
