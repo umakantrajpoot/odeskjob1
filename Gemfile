@@ -21,8 +21,8 @@ gem "carrierwave"
 gem "carrierwave-video"
 gem "carrierwave-video-thumbnailer"
 gem "figaro"
-gem 'carrierwave_backgrounder'
 gem 'sidekiq'
+gem 'sinatra'
 
 group :development, :test do
   gem 'byebug'

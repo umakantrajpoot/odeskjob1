@@ -26,15 +26,19 @@ class ListingsController < ApplicationController
   def create
     photos = params[:listing][:image]
     params[:listing][:photos_attributes] = {}
+# #=begin
+#     photos.each_with_index do | photo, index |
+#       img = {}
+#       img["image"] = photo
+#       params[:listing][:photos_attributes][index.to_s] = img
+#     end
+# #=end
 
-    photos.each_with_index do | photo, index |
-      img = {}
-      img["image"] = photo
-      params[:listing][:photos_attributes][index.to_s] = img
-    end
     @listing = Listing.new(listing_params)
     if @listing.save!
-      redirect_to @listing
+      ListingWorker.perform_async(photos.map(&:path), @listing.id)
+      #HardWorker.perform_async(photos.map(&:path), @listing.id)
+      redirect_to action: 'index', notice: 'Successfully created listing'
     else
       raise
       render action: 'new', notice: 'Something went wrong, Listing was not saved!'

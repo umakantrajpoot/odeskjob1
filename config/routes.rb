@@ -1,5 +1,8 @@
-Rails.application.routes.draw do
 
+Rails.application.routes.draw do
+  require 'sinatra/base'
+  require 'sidekiq/web'
+  mount Sidekiq::Web, at: '/sidekiq'
   root 'listings#index'
 
   # resources :videos
