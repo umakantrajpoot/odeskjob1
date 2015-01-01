@@ -36,7 +36,7 @@ class ListingsController < ApplicationController
     photos_name = []
     photos.each do | photo |
       photos_name << photo.path.split('tmp/')[1]
-      FileUtils.move(photo.path, "#{Rails.root}/public/tmp")
+      FileUtils.move(photo.path, "#{Rails.root}/tmp/uploads")
     end
 
     @listing = Listing.new(listing_params)
