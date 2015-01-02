@@ -50,7 +50,7 @@ class ListingsController < ApplicationController
 
       ListingWorker.perform_async(tmp_directory, photos_name, @listing.id)
 =end
-      ListingWorker.new.async.perform(photos, @listing.id)
+      #ListingWorker.new.async.perform(photos, @listing.id)
       redirect_to action: 'index', notice: 'Successfully created listing'
     else
       raise
