@@ -23,8 +23,10 @@ gem "carrierwave-video-thumbnailer"
 gem "figaro"
 gem 'sidekiq'
 gem 'sinatra'
-
+gem 'carrierwave_backgrounder'
+gem 'sucker_punch', '~> 1.0'
 group :development, :test do
+  gem 'pry'
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'

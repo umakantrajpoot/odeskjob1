@@ -40,6 +40,7 @@ class ListingsController < ApplicationController
 
     @listing = Listing.new(listing_params)
     if @listing.save!
+=begin
       photos_name = []
       tmp_directory = FileUtils.mkdir_p(File.join("#{Rails.root}/tmp/cache/uploads/#{@listing.class.to_s.underscore}/images/#{@listing.id}"), :mode => 0777)[0]
         photos.each do | photo |
@@ -48,6 +49,8 @@ class ListingsController < ApplicationController
       end
 
       ListingWorker.perform_async(tmp_directory, photos_name, @listing.id)
+=end
+      ListingWorker.new.async.perform(photos, @listing.id)
       redirect_to action: 'index', notice: 'Successfully created listing'
     else
       raise

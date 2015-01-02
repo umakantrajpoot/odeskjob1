@@ -1,4 +1,5 @@
 class ListingWorker
+=begin
   include Sidekiq::Worker
   def perform(tmp_directory, photos, listing_id)
     photos.each do | photo |
@@ -8,4 +9,13 @@ class ListingWorker
       FileUtils.rm_r(tmp_directory, :force => true)
     end
   end
+=end
+  include SuckerPunch::Job
+
+  def perform(photos, listing_id)
+    photos.each do | photo |
+      Photo.create!(:image => photo, :listing_id => listing_id)
+    end
+  end
+
 end
