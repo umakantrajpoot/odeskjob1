@@ -21,9 +21,7 @@ gem "carrierwave"
 gem "carrierwave-video"
 gem "carrierwave-video-thumbnailer"
 gem "figaro"
-gem 'sidekiq'
 gem 'sinatra'
-gem 'carrierwave_backgrounder'
 gem 'sucker_punch', '~> 1.0'
 group :development, :test do
   gem 'pry'

@@ -43,6 +43,9 @@
           } else {
             $("#listing_images").html(imageString);
           }
+          timeout = setTimeout(function(){
+            $('#progress .progress-bar-success').css('width','0%');
+          }, 2000);
         }
       }
     });

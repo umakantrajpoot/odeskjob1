@@ -26,31 +26,10 @@ class ListingsController < ApplicationController
   def create
     photos = params[:listing][:image]
     params[:listing][:photos_attributes] = {}
-    #~ photos.each_with_index do | photo, index |
-      #~ img = {}
-      #~ img["image"] = photo
-      #~ params[:listing][:photos_attributes][index.to_s] = img
-    #~ end
-
-    #~ photos_name = []
-    #~ photos.each do | photo |
-      #~ photos_name << photo.path.split('tmp/')[1]
-      #~ FileUtils.move(photo.path, "#{Rails.root}/tmp/uploads")
-    #~ end
-
+    
     @listing = Listing.new(listing_params)
     if @listing.save!
-=begin
-      photos_name = []
-      tmp_directory = FileUtils.mkdir_p(File.join("#{Rails.root}/tmp/cache/uploads/#{@listing.class.to_s.underscore}/images/#{@listing.id}"), :mode => 0777)[0]
-        photos.each do | photo |
-        photos_name << photo.path.split('tmp/')[1]
-        FileUtils.move(photo.path, tmp_directory)
-      end
-
-      ListingWorker.perform_async(tmp_directory, photos_name, @listing.id)
-=end
-      #ListingWorker.new.async.perform(photos, @listing.id)
+      ListingWorker.new.async.perform(photos, @listing.id)
       redirect_to action: 'index', notice: 'Successfully created listing'
     else
       raise

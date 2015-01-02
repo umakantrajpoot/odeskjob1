@@ -2,9 +2,6 @@ class PhotoUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
   include CarrierWave::MimeTypes
 
-  include Sidekiq::Worker
-  sidekiq_options :queue => :photos_sidekiq
-
   process :set_content_type
 
   if Rails.env.development? || Rails.env.test?
